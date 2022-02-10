@@ -17,7 +17,6 @@ const Signup = () => {
       email: email,
       password: password,
     });
-    setConfirmation(true);
     setRegistered(true);
     console.log(res);
     navigate("/login");
