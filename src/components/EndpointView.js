@@ -9,13 +9,14 @@ const EndPointView = () => {
   const [action, setAction] = useState("Fetch");
   const [models, setModelsData] = useState();
   const [model, setModel] = useState();
+  const [auth, setAuth] = useState(false);
   const { id } = useParams();
 
   const handleUpdateEndPoint = async (e) => {
     e.preventDefault();
     await axios.post(
       process.env.REACT_APP_HOST + "/endpoint/update",
-      { _id: id, action: action, modelid: model },
+      { _id: id, action: action, modelid: model, auth: auth },
       {
         headers: {
           Authorization: "Bearer " + cookies.get("token"),
@@ -54,6 +55,7 @@ const EndPointView = () => {
       if (res.data.model) {
         setModel(res.data.model._id);
       }
+      setAuth(res.data.authentify);
       getModelsData(res.data);
     };
 
@@ -134,6 +136,34 @@ const EndPointView = () => {
                     );
                   })}
                 </select>
+              </dd>
+            </div>
+            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">
+                Need token autorization ?
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <div className="relative flex items-start">
+                  <div className="flex items-center h-5">
+                    <input
+                      checked={auth}
+                      onChange={(e) => setAuth(e.target.checked)}
+                      id="auth"
+                      aria-describedby="auth-description"
+                      name="auth"
+                      type="checkbox"
+                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label htmlFor="auth" className="font-medium text-gray-700">
+                      Activate token autorization
+                    </label>
+                    <p id="auth-description" className="text-gray-500">
+                      Your users need autorization to use this endpoint
+                    </p>
+                  </div>
+                </div>
               </dd>
             </div>
           </dl>
