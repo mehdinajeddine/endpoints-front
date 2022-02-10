@@ -20,7 +20,7 @@ const Header = ({ logged, setLogged }) => {
         <div className="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
           <div className="flex items-center">
             <div className="w-40">
-              <Link to="/">Endpoints</Link>
+              <Link to="/">Endpoints logo</Link>
             </div>
             <div className="hidden ml-10 space-x-8 lg:block">
               {navigation.map((link) => (
