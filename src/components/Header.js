@@ -10,8 +10,8 @@ const Header = ({ logged, setLogged }) => {
   };
 
   const navigation = [
-    { name: "Endpoints", to: "/" },
     { name: "Models", to: "/models" },
+    { name: "Endpoints", to: "/" },
   ];
 
   return (
