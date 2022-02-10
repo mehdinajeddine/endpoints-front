@@ -114,6 +114,20 @@ const ModelView = () => {
     getModelData();
   };
 
+  const getModelData = async () => {
+    const res = await axios.get(
+      process.env.REACT_APP_HOST + "/model/view/" + id,
+      {
+        headers: {
+          Authorization: "Bearer " + cookies.get("token"),
+        },
+      }
+    );
+    setData(res.data);
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     const getModelData = async () => {
       const res = await axios.get(
