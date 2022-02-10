@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import cookies from "js-cookie";
 
@@ -75,6 +75,8 @@ const ModelView = () => {
             placeholder={label}
           />
         );
+      default:
+        return <span>no field</span>;
     }
   };
 
@@ -90,20 +92,6 @@ const ModelView = () => {
       }
     );
     getModelData();
-  };
-
-  const getModelData = async () => {
-    const res = await axios.get(
-      process.env.REACT_APP_HOST + "/model/view/" + id,
-      {
-        headers: {
-          Authorization: "Bearer " + cookies.get("token"),
-        },
-      }
-    );
-    setData(res.data);
-
-    setIsLoading(false);
   };
 
   const handleAddField = async (e) => {
@@ -127,6 +115,19 @@ const ModelView = () => {
   };
 
   useEffect(() => {
+    const getModelData = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_HOST + "/model/view/" + id,
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.get("token"),
+          },
+        }
+      );
+      setData(res.data);
+
+      setIsLoading(false);
+    };
     getModelData();
   }, []);
   return isLoading ? (
@@ -185,19 +186,19 @@ const ModelView = () => {
                         </span>
                       </div>
                       <div className="ml-4 flex-shrink-0">
-                        <a
-                          href="#"
+                        <Link
+                          to="/"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
                           Edit
-                        </a>
+                        </Link>
                         &nbsp;
-                        <a
-                          href="#"
+                        <Link
+                          to="/"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
                         >
                           Delete
-                        </a>
+                        </Link>
                       </div>
                     </li>
                   );

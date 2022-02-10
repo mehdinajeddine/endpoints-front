@@ -79,12 +79,12 @@ const Models = () => {
                         View
                       </Link>{" "}
                       &nbsp;
-                      <a
-                        href="#"
+                      <Link
+                        to="/"
                         className="text-indigo-600 hover:text-indigo-900"
                       >
                         Edit
-                      </a>
+                      </Link>
                     </td>
                   </tr>
                 ))}
