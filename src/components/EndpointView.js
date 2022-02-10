@@ -58,7 +58,7 @@ const EndPointView = () => {
     };
 
     getEndPointData();
-  }, []);
+  }, [id]);
   return isLoading ? (
     <div>Is Loading...</div>
   ) : (

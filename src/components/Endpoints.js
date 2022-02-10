@@ -30,7 +30,7 @@ const Endpoints = () => {
     };
 
     fetchEndpoints();
-  }, []);
+  }, [navigate]);
   return isLoading ? (
     <div>is Loading...</div>
   ) : (

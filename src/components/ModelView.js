@@ -13,7 +13,7 @@ const ModelView = () => {
 
   const handleAddData = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
+    await axios.post(
       process.env.REACT_APP_HOST + "/model/data/add",
       { ...values, modelid: data.model._id },
       {
@@ -80,7 +80,7 @@ const ModelView = () => {
 
   const handleGenerateModel = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
+    await axios.post(
       process.env.REACT_APP_HOST + "/model/generate/",
       { id: id },
       {
@@ -108,7 +108,7 @@ const ModelView = () => {
 
   const handleAddField = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
+    await axios.post(
       process.env.REACT_APP_HOST + "/fields/add",
       {
         label: label,
