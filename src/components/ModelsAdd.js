@@ -9,7 +9,7 @@ const ModelsAdd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
+    await axios.post(
       process.env.REACT_APP_HOST + "/models/add",
       {
         label: label,

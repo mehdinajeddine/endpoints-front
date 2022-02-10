@@ -8,7 +8,6 @@ import axios from "axios";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmation, setConfirmation] = useState(false);
   const [registered, setRegistered] = useState(false);
   const navigate = useNavigate();
 
