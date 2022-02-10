@@ -11,6 +11,7 @@ import Models from "./components/Models";
 import ModelsAdd from "./components/ModelsAdd";
 import ModelView from "./components/ModelView";
 import EndPointView from "./components/EndpointView";
+import Peoples from "./components/Peoples";
 
 function App() {
   const [logged, setLogged] = useState(cookies.get("token") || false);
@@ -32,6 +33,7 @@ function App() {
             <Route path="/models/add" element={<ModelsAdd />} />
             <Route path="/model/:id" element={<ModelView />} />
             <Route path="/endpoint/:id" element={<EndPointView />} />
+            <Route path="/peoples" element={<Peoples />} />
           </Routes>
         </Router>
       </div>
