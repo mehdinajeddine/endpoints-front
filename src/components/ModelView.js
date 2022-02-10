@@ -9,6 +9,7 @@ const ModelView = () => {
   const [label, setLabel] = useState("");
   const [type, setType] = useState("String");
   const [values, setValues] = useState({});
+  const [refreshModels, setRefreshModels] = useState(false);
   const { id } = useParams();
 
   const handleAddData = async (e) => {
@@ -91,7 +92,8 @@ const ModelView = () => {
         },
       }
     );
-    getModelData();
+    //    getModelData();
+    setRefreshModels(!refreshModels);
   };
 
   const handleAddField = async (e) => {
@@ -111,10 +113,11 @@ const ModelView = () => {
     );
     setLabel("");
     setType("String");
-    getModelData();
+    //getModelData();
+    setRefreshModels(!refreshModels);
   };
 
-  const getModelData = async () => {
+  /* const getModelData = async () => {
     const res = await axios.get(
       process.env.REACT_APP_HOST + "/model/view/" + id,
       {
@@ -126,7 +129,7 @@ const ModelView = () => {
     setData(res.data);
 
     setIsLoading(false);
-  };
+  };*/
 
   useEffect(() => {
     const getModelData = async () => {
@@ -143,7 +146,7 @@ const ModelView = () => {
       setIsLoading(false);
     };
     getModelData();
-  }, [id]);
+  }, [id, refreshModels]);
   return isLoading ? (
     <div>Is Loading...</div>
   ) : (
