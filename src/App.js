@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import "./App.css";
 import Signup from "./containers/Signup";
-import Dashboard from "./containers/Dashboard";
 import Header from "./components/Header";
 import Signin from "./containers/Signin";
 import cookies from "js-cookie";

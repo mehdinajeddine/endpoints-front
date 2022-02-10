@@ -2,7 +2,6 @@ import { React, useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Notification from "../components/Notification";
 
 // import SignupConfirmation from "./SignupConfirmation";
 

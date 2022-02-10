@@ -1,9 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { PaperClipIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import cookies from "js-cookie";
-import { Link } from "react-router-dom";
 
 const ModelView = () => {
   const [isLoading, setIsLoading] = useState(true);
