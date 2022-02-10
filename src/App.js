@@ -6,7 +6,7 @@ import Signin from "./containers/Signin";
 import cookies from "js-cookie";
 import EndpointAdd from "./components/EndpointAdd";
 import Endpoints from "./components/Endpoints";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Models from "./components/Models";
 import ModelsAdd from "./components/ModelsAdd";
 import ModelView from "./components/ModelView";

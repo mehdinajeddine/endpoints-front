@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import cookies from "js-cookie";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EndpointAdd = () => {
   const [label, setLabel] = useState();
@@ -11,7 +11,7 @@ const EndpointAdd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
+    await axios.post(
       process.env.REACT_APP_HOST + "/endpoints/add",
       {
         label: label,

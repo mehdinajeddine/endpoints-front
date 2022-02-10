@@ -9,12 +9,11 @@ const EndPointView = () => {
   const [action, setAction] = useState("Fetch");
   const [models, setModelsData] = useState();
   const [model, setModel] = useState();
-  const [values, setValues] = useState({});
   const { id } = useParams();
 
   const handleUpdateEndPoint = async (e) => {
     e.preventDefault();
-    const res = await axios.post(
+    await axios.post(
       process.env.REACT_APP_HOST + "/endpoint/update",
       { _id: id, action: action, modelid: model },
       {
@@ -39,25 +38,25 @@ const EndPointView = () => {
     setIsLoading(false);
   };
 
-  const getEndPointData = async () => {
-    const res = await axios.get(
-      process.env.REACT_APP_HOST + "/endpoint/view/" + id,
-      {
-        headers: {
-          Authorization: "Bearer " + cookies.get("token"),
-        },
-      }
-    );
-    setData(res.data);
-    setAction(res.data?.action);
-    //    res.data?.model ? setModel(res.data?.model._id) : 1;
-    if (res.data.model) {
-      setModel(res.data.model._id);
-    }
-    getModelsData(res.data);
-  };
-
   useEffect(() => {
+    const getEndPointData = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_HOST + "/endpoint/view/" + id,
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.get("token"),
+          },
+        }
+      );
+      setData(res.data);
+      setAction(res.data?.action);
+      //    res.data?.model ? setModel(res.data?.model._id) : 1;
+      if (res.data.model) {
+        setModel(res.data.model._id);
+      }
+      getModelsData(res.data);
+    };
+
     getEndPointData();
   }, []);
   return isLoading ? (

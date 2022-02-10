@@ -7,26 +7,28 @@ const Endpoints = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const navigate = useNavigate();
-  const fetchEndpoints = async () => {
-    try {
-      const res = await axios.post(
-        process.env.REACT_APP_HOST + "/endpoints",
-        {},
-        {
-          headers: {
-            Authorization: "Bearer " + cookies.get("token"),
-          },
-        }
-      );
-      setData(res.data);
-      console.log(res);
-      setIsLoading(false);
-    } catch (e) {
-      console.log(e.message);
-      navigate("/login");
-    }
-  };
+
   useEffect(() => {
+    const fetchEndpoints = async () => {
+      try {
+        const res = await axios.post(
+          process.env.REACT_APP_HOST + "/endpoints",
+          {},
+          {
+            headers: {
+              Authorization: "Bearer " + cookies.get("token"),
+            },
+          }
+        );
+        setData(res.data);
+        console.log(res);
+        setIsLoading(false);
+      } catch (e) {
+        console.log(e.message);
+        navigate("/login");
+      }
+    };
+
     fetchEndpoints();
   }, []);
   return isLoading ? (
