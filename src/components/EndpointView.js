@@ -51,7 +51,9 @@ const EndPointView = () => {
     setData(res.data);
     setAction(res.data?.action);
     //    res.data?.model ? setModel(res.data?.model._id) : 1;
-    res.data.model ? setModel(res.data.model._id) : 1;
+    if (res.data.model) {
+      setModel(res.data.model._id);
+    }
     getModelsData(res.data);
   };
 
