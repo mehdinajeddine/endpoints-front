@@ -27,7 +27,7 @@ const Models = () => {
       }
     };
     fetchModels();
-  }, []);
+  }, [navigate]);
   return isLoading ? (
     <div>is Loading...</div>
   ) : (

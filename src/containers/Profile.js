@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/solid";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import cookies from "js-cookie";
 
@@ -10,7 +10,6 @@ const Profile = () => {
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState();
   const [data, setData] = useState();
-  const navigate = useNavigate();
 
   const handSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +29,9 @@ const Profile = () => {
         }
       );
       setData(res.data);
-    } catch (error) {}
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   useEffect(() => {

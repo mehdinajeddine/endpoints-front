@@ -15,13 +15,10 @@ const Signup = () => {
   const handSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        process.env.REACT_APP_HOST + "/user/signup",
-        {
-          email: email,
-          password: password,
-        }
-      );
+      await axios.post(process.env.REACT_APP_HOST + "/user/signup", {
+        email: email,
+        password: password,
+      });
       setRegistered(true);
       navigate("/login");
     } catch (e) {
