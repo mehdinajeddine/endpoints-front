@@ -16,7 +16,7 @@ import Peoples from "./components/Peoples";
 function App() {
   const [logged, setLogged] = useState(cookies.get("token") || false);
   return (
-    <div className="bg-slate-300 h-full">
+    <div className="h-full">
       <div className="container mx-auto px-4">
         <Router>
           <Header logged={logged} setLogged={setLogged} />

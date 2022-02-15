@@ -1,6 +1,7 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
 import cookies from "js-cookie";
+import logo from "../assets/logo.png";
 
 const Header = ({ logged, setLogged }) => {
   const token = cookies.get("token");
@@ -16,19 +17,21 @@ const Header = ({ logged, setLogged }) => {
   ];
 
   return (
-    <header className="bg-indigo-600">
+    <header>
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="w-full py-6 flex items-center justify-between border-b border-indigo-500 lg:border-none">
           <div className="flex items-center">
             <div className="w-40">
-              <Link to="/">Endpoint logo</Link>
+              <Link to="/">
+                <img src={logo} alt="" width="162" />
+              </Link>
             </div>
             <div className="hidden ml-10 space-x-8 lg:block">
               {navigation.map((link) => (
                 <Link
                   key={link.name}
                   to={link.to}
-                  className="text-base font-medium text-white hover:text-indigo-50"
+                  className="text-base  text-darkblue  hover:text-red"
                 >
                   {link.name}
                 </Link>
@@ -53,10 +56,10 @@ const Header = ({ logged, setLogged }) => {
               </>
             ) : (
               <>
-                <span>Bearer : {token}</span>
+                <span className="text-sm">Bearer : {token}</span>
                 <button
                   onClick={handleLogout}
-                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-red-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                  className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                 >
                   Se déconnecter
                 </button>
@@ -76,6 +79,7 @@ const Header = ({ logged, setLogged }) => {
           ))}
         </div>
       </nav>
+      <hr />
     </header>
   );
 };
