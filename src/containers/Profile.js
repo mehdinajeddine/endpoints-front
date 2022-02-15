@@ -27,6 +27,7 @@ const Profile = () => {
           },
         }
       );
+      cookies.set("avatar", res.data.avatar.secure_url);
       setData(res.data);
     } catch (error) {
       setError(error.message);
