@@ -1,55 +1,95 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { ExclamationCircleIcon } from "@heroicons/react/solid";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import cookies from "js-cookie";
 
-// import SignupConfirmation from "./SignupConfirmation";
-
-const Signup = () => {
+const Profile = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [registered, setRegistered] = useState(false);
   const [error, setError] = useState("");
+  const [avatar, setAvatar] = useState();
+  const [data, setData] = useState();
   const navigate = useNavigate();
 
   const handSubmit = async (e) => {
     e.preventDefault();
     try {
+      const formData = new FormData();
+      formData.append("avatar", avatar);
+      formData.append("email", email);
+      formData.append("password", password);
       const res = await axios.post(
-        process.env.REACT_APP_HOST + "/user/signup",
+        process.env.REACT_APP_HOST + "/user/update",
+        formData,
         {
-          email: email,
-          password: password,
+          headers: {
+            Authorization: "Bearer " + cookies.get("token"),
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
-      setRegistered(true);
-      navigate("/login");
-    } catch (e) {
-      setError(e.response.data.error);
-    }
+      setData(res.data);
+    } catch (error) {}
   };
-  return !registered ? (
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const res = await axios.post(
+        process.env.REACT_APP_HOST + "/user/data",
+        {},
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.get("token"),
+          },
+        }
+      );
+      setData(res.data);
+    };
+    getUserData();
+  }, []);
+
+  return (
     <div className="max-w-2xl container mx-auto">
-      <h2 className="mt-6 text-center text-2xl text-dark">
-        Create an Endspoints account
-      </h2>
+      <h1 className="mt-6 text-center text-2xl text-dark">Profile</h1>
       <form className="mt-8 space-y-6" onSubmit={handSubmit}>
         <div className="text-red text-sm flex items-center">
           {error !== "" && <ExclamationCircleIcon className="h-7 w-7 mr-1" />}
           {error}
         </div>
-        <div>Enter your email address and password.</div>
-        <div className="rounded-md shadow-sm -space-y-px">
-          <div>
+        <div className="rounded-md shadow-sm ">
+          <div className="flex items-center justify-center">
+            <span className="mr-2 h-12 w-12 rounded-full overflow-hidden">
+              {data && data.avatar ? (
+                <img
+                  className="h-12 w-12 rounded-full object-cover"
+                  src={data.avatar.secure_url}
+                  alt="avater"
+                />
+              ) : (
+                <svg
+                  className="h-full w-full text-gray-300"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
+            </span>
+            <input type="file" onChange={(e) => setAvatar(e.target.files[0])} />
+          </div>
+
+          <div className="mt-4">
             <label htmlFor="email-address" className="sr-only">
               Email address
             </label>
             <input
+              defaultValue={data && data.email}
+              disabled={true}
               id="email-address"
               name="email"
               type="email"
               autoComplete="email"
-              required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
               onChange={(e) => {
@@ -66,7 +106,6 @@ const Signup = () => {
               name="password"
               type="password"
               autoComplete="current-password"
-              required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
               placeholder="Password"
               onChange={(e) => {
@@ -82,23 +121,12 @@ const Signup = () => {
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
           >
             <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
-            Sign up
+            Update
           </button>
-          <div className="text-sm text-center mt-4">
-            <Link to="/login" className="text-teal-600 hover:text-teal-500">
-              Already have an account? <span className="underline">Log in</span>
-            </Link>
-          </div>
         </div>
       </form>
     </div>
-  ) : (
-    <>
-      <Link to="/login" className="text-teal-600 hover:text-teal-500">
-        Go to login screen
-      </Link>
-    </>
   );
 };
 
-export default Signup;
+export default Profile;

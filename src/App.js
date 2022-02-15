@@ -12,15 +12,15 @@ import ModelsAdd from "./components/ModelsAdd";
 import ModelView from "./components/ModelView";
 import EndPointView from "./components/EndpointView";
 import Peoples from "./components/Peoples";
+import Profile from "./containers/Profile";
 
 function App() {
   const [logged, setLogged] = useState(cookies.get("token") || false);
   return (
     <div className="h-full">
-      <div className="container mx-auto px-4">
+      <div className="">
         <Router>
           <Header logged={logged} setLogged={setLogged} />
-
           <Routes>
             <Route
               path="/login"
@@ -34,6 +34,7 @@ function App() {
             <Route path="/model/:id" element={<ModelView />} />
             <Route path="/endpoint/:id" element={<EndPointView />} />
             <Route path="/peoples" element={<Peoples />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </Router>
       </div>
