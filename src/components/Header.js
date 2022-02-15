@@ -4,7 +4,6 @@ import cookies from "js-cookie";
 import logo from "../assets/logo.png";
 
 const Header = ({ logged, setLogged }) => {
-  const token = cookies.get("token");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -38,7 +37,7 @@ const Header = ({ logged, setLogged }) => {
                   to={link.to}
                   className={
                     "text-base  text-white  hover:text-red" +
-                    (location.pathname == link.to && " font-medium underline")
+                    (location.pathname === link.to && " font-medium underline")
                   }
                 >
                   {link.name}

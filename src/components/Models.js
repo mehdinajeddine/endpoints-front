@@ -8,24 +8,24 @@ const Models = () => {
   const [data, setData] = useState();
   const navigate = useNavigate();
 
-  const fetchModels = async () => {
-    try {
-      const res = await axios.post(
-        process.env.REACT_APP_HOST + "/models",
-        {},
-        {
-          headers: {
-            Authorization: "Bearer " + cookies.get("token"),
-          },
-        }
-      );
-      setData(res.data);
-      setIsLoading(false);
-    } catch (e) {
-      navigate("/login");
-    }
-  };
   useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const res = await axios.post(
+          process.env.REACT_APP_HOST + "/models",
+          {},
+          {
+            headers: {
+              Authorization: "Bearer " + cookies.get("token"),
+            },
+          }
+        );
+        setData(res.data);
+        setIsLoading(false);
+      } catch (e) {
+        navigate("/login");
+      }
+    };
     fetchModels();
   }, []);
   return isLoading ? (
