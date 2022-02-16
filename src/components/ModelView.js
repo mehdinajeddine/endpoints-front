@@ -14,15 +14,28 @@ const ModelView = () => {
 
   const handleAddData = async (e) => {
     e.preventDefault();
-    await axios.post(
-      process.env.REACT_APP_HOST + "/model/data/add",
-      { ...values, modelid: data.model._id },
-      {
-        headers: {
-          Authorization: "Bearer " + cookies.get("token"),
-        },
-      }
-    );
+    try {
+      await axios.post(
+        process.env.REACT_APP_HOST + "/model/data/add",
+        { ...values, modelid: data.model._id },
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.get("token"),
+          },
+        }
+      );
+      initValues();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const initValues = () => {
+    const val = { ...values };
+    for (const [key, value] of Object.entries(values)) {
+      val[key] = "";
+    }
+    setValues(val);
   };
 
   const updateValues = (label, value) => {
@@ -36,6 +49,7 @@ const ModelView = () => {
       case "String":
         return (
           <input
+            value={values[label]}
             onChange={(e) => updateValues(label, e.target.value)}
             id={label}
             name={label}
@@ -57,6 +71,7 @@ const ModelView = () => {
       case "Number":
         return (
           <input
+            value={values[label]}
             onChange={(e) => updateValues(label, e.target.value)}
             id={label}
             name={label}
@@ -68,6 +83,7 @@ const ModelView = () => {
       case "Password":
         return (
           <input
+            value={values[label]}
             onChange={(e) => updateValues(label, e.target.value)}
             id={label}
             name={label}
@@ -150,7 +166,7 @@ const ModelView = () => {
   return isLoading ? (
     <div>Is Loading...</div>
   ) : (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div className="max-w-6xl container mx-auto mt-10 bg-white shadow overflow-hidden sm:rounded-lg">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg leading-6 font-medium text-gray-900">
           {data.model.label}
@@ -222,6 +238,7 @@ const ModelView = () => {
                     <div className="w-0 flex-1 flex items-center">
                       <span className="ml-2 flex-1 w-0 ">
                         <input
+                          value={label}
                           onChange={(e) => {
                             setLabel(e.target.value);
                           }}
@@ -256,7 +273,7 @@ const ModelView = () => {
       </div>
       <button
         onClick={handleGenerateModel}
-        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md  bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
       >
         Generate Model
       </button>
@@ -277,7 +294,7 @@ const ModelView = () => {
                 </div>
               );
             })}
-            <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+            <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md  bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
               Add Data
             </button>
           </form>
