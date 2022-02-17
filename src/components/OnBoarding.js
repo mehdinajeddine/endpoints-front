@@ -53,7 +53,7 @@ const OnBoarding = ({ setOnboarding }) => {
       <h1 className="mt-6 text-center text-2xl text-dark">
         Let's create a simple API in 6 steps...
       </h1>{" "}
-      <ul role="list" className="mt-3  ">
+      <ul className="mt-3  ">
         <li className="col-span-1 flex shadow-sm rounded-md">
           <div
             className={
