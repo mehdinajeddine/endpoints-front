@@ -83,8 +83,18 @@ const Endpoints = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2 inline-flex text-xs leading-5  rounded-full">
-                        {process.env.REACT_APP_HOST}/{item.owner._id}
-                        {item.path}
+                        {item.model ? (
+                          <small>
+                            {process.env.REACT_APP_HOST}/{item.owner._id}
+                            {item.path}
+                          </small>
+                        ) : (
+                          <small>
+                            <Link to={"/endpoint/" + item._id}>
+                              Select model - click here
+                            </Link>
+                          </small>
+                        )}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -94,7 +104,7 @@ const Endpoints = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span className="px-2 inline-flex text-xs leading-5  rounded-full bg-green-100 text-green-800">
-                        Active
+                        {item.model ? "Active" : "Inactive"}
                       </span>
                     </td>
 

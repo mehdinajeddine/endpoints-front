@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import cookies from "js-cookie";
 
@@ -12,17 +12,22 @@ const EndPointView = () => {
   const [auth, setAuth] = useState(false);
   const { id } = useParams();
 
+  const navigate = useNavigate();
+
   const handleUpdateEndPoint = async (e) => {
     e.preventDefault();
-    await axios.post(
-      process.env.REACT_APP_HOST + "/endpoint/update",
-      { _id: id, action: action, modelid: model, auth: auth },
-      {
-        headers: {
-          Authorization: "Bearer " + cookies.get("token"),
-        },
-      }
-    );
+    try {
+      await axios.post(
+        process.env.REACT_APP_HOST + "/endpoint/update",
+        { _id: id, action: action, modelid: model, auth: auth },
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.get("token"),
+          },
+        }
+      );
+      navigate("/");
+    } catch (error) {}
   };
 
   const getModelsData = async (endpoint) => {

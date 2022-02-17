@@ -15,12 +15,18 @@ const ModelView = () => {
   const handleAddData = async (e) => {
     e.preventDefault();
     try {
+      const formData = new FormData();
+      for (const [key, value] of Object.entries(values)) {
+        formData.append(key, value);
+      }
+      formData.append("modelid", data.model._id);
       await axios.post(
         process.env.REACT_APP_HOST + "/model/data/add",
-        { ...values, modelid: data.model._id },
+        formData,
         {
           headers: {
             Authorization: "Bearer " + cookies.get("token"),
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -88,6 +94,17 @@ const ModelView = () => {
             id={label}
             name={label}
             type="password"
+            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+            placeholder={label}
+          />
+        );
+      case "mongoose.Schema.Types.Mixed":
+        return (
+          <input
+            onChange={(e) => updateValues(label, e.target.files[0])}
+            id={label}
+            name={label}
+            type="file"
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
             placeholder={label}
           />
@@ -246,6 +263,7 @@ const ModelView = () => {
                           className="appearance-none rounded-none   w-28 px-1 py-1 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
                         />
                         <select
+                          value={type}
                           onChange={(e) => {
                             setType(e.target.value);
                           }}
@@ -253,9 +271,9 @@ const ModelView = () => {
                           className="form-select appearance-none rounded-none   w-28 px-1 py-1 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
                         >
                           <option value="String">String</option>
-                          <option value="Number">Number</option>
-                          <option value="Boolean">Boolean</option>
-                          <option value="Date">Date</option>
+                          <option value="mongoose.Schema.Types.Mixed">
+                            Image
+                          </option>
                         </select>
                       </span>
                     </div>
