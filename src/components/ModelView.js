@@ -38,7 +38,7 @@ const ModelView = () => {
 
   const initValues = () => {
     const val = { ...values };
-    for (const [key, value] of Object.entries(values)) {
+    for (const [key] of Object.entries(values)) {
       val[key] = "";
     }
     setValues(val);
