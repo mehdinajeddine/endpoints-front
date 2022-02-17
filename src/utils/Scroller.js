@@ -8,7 +8,7 @@ const Scroller = ({ isLoading, ref }) => {
         top: ref.current.offsetTop,
       });
     }
-  }, [isLoading]);
+  }, [isLoading, ref]);
   return <></>;
 };
 

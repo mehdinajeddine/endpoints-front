@@ -45,7 +45,7 @@ const OnBoarding = ({ setOnboarding }) => {
       }
     };
     getOnboardingData();
-  }, [location.pathname]);
+  }, [location.pathname, navigate, setOnboarding]);
   return isLoading ? (
     <div></div>
   ) : (
