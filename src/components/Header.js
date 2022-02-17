@@ -10,6 +10,7 @@ const Header = ({ logged, setLogged }) => {
   const handleLogout = (e) => {
     cookies.remove("token");
     cookies.remove("avatar");
+    cookies.remove("onboarding");
     setLogged(false);
     navigate("/login");
   };

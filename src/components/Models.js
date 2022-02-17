@@ -1,12 +1,16 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import axios from "axios";
 import cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
+import Scroller from "../utils/Scroller";
 
 const Models = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
+  const head = useRef();
   const navigate = useNavigate();
+
+  Scroller({ ref: head, isLoading: isLoading });
 
   useEffect(() => {
     const fetchModels = async () => {
@@ -31,7 +35,7 @@ const Models = () => {
   return isLoading ? (
     <div>is Loading...</div>
   ) : (
-    <div className="flex flex-col sm:px-6 lg:px-8 mt-10">
+    <div ref={head} className="flex flex-col sm:px-6 lg:px-8 mt-10">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 mx-auto">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <Link

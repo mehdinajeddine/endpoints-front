@@ -1,7 +1,8 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import cookies from "js-cookie";
+import Scroller from "../utils/Scroller";
 
 const ModelView = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +12,9 @@ const ModelView = () => {
   const [values, setValues] = useState({});
   const [refreshModels, setRefreshModels] = useState(false);
   const { id } = useParams();
+  const head = useRef();
+
+  Scroller({ ref: head, isLoading: isLoading });
 
   const handleAddData = async (e) => {
     e.preventDefault();
@@ -183,7 +187,10 @@ const ModelView = () => {
   return isLoading ? (
     <div>Is Loading...</div>
   ) : (
-    <div className="max-w-6xl container mx-auto mt-10 bg-white shadow overflow-hidden sm:rounded-lg">
+    <div
+      ref={head}
+      className="max-w-6xl container mx-auto mt-10 bg-white shadow overflow-hidden sm:rounded-lg"
+    >
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg leading-6 font-medium text-gray-900">
           {data.model.label}
@@ -291,7 +298,7 @@ const ModelView = () => {
       </div>
       <button
         onClick={handleGenerateModel}
-        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md  bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+        className="group relative w-full flex justify-center py-2 px-4 border border-black text-sm font-medium rounded-md  bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
       >
         Generate Model
       </button>
@@ -312,7 +319,7 @@ const ModelView = () => {
                 </div>
               );
             })}
-            <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md  bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+            <button className="group relative w-full flex justify-center py-2 px-4 border border-black text-sm font-medium rounded-md  bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
               Add Data
             </button>
           </form>

@@ -25,7 +25,7 @@ const ModelsAdd = () => {
 
   return (
     <div className="max-w-2xl container mx-auto mt-10">
-      <h1 className="mt-6 text-center text-2xl text-dark">Ajouter un Model</h1>{" "}
+      <h1 className="mt-6 text-center text-2xl text-dark">Create a Model</h1>{" "}
       <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
         <input type="hidden" name="remember" defaultValue="true" />
         <div className="rounded-md shadow-sm -space-y-px">
@@ -39,7 +39,7 @@ const ModelsAdd = () => {
               type="text"
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
-              placeholder="Libellé"
+              placeholder="Label"
               onChange={(e) => {
                 setLabel(e.target.value);
               }}
@@ -50,9 +50,9 @@ const ModelsAdd = () => {
         <div>
           <button
             type="submit"
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+            className="group relative w-full flex justify-center py-2 px-4 border border-black text-sm font-medium rounded-md bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 mb-20"
           >
-            Créer
+            Create
           </button>
         </div>
       </form>

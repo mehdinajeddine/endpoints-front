@@ -13,14 +13,21 @@ import ModelView from "./components/ModelView";
 import EndPointView from "./components/EndpointView";
 import Peoples from "./components/Peoples";
 import Profile from "./containers/Profile";
+import OnBoarding from "./components/OnBoarding";
 
 function App() {
   const [logged, setLogged] = useState(cookies.get("token") || false);
+  const [onboarding, setOnboarding] = useState(false);
+  console.log("onboarding : ", onboarding);
+
   return (
-    <div className="h-full">
+    <div className="h-full mb-40">
       <div className="">
         <Router>
           <Header logged={logged} setLogged={setLogged} />
+          {logged && !onboarding && (
+            <OnBoarding setOnboarding={setOnboarding} />
+          )}
           <Routes>
             <Route
               path="/login"

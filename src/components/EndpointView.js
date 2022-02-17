@@ -1,7 +1,8 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import cookies from "js-cookie";
+import Scroller from "../utils/Scroller";
 
 const EndPointView = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,8 +12,11 @@ const EndPointView = () => {
   const [model, setModel] = useState();
   const [auth, setAuth] = useState(false);
   const { id } = useParams();
+  const head = useRef();
 
   const navigate = useNavigate();
+
+  Scroller({ ref: head, isLoading: isLoading });
 
   const handleUpdateEndPoint = async (e) => {
     e.preventDefault();
@@ -69,7 +73,10 @@ const EndPointView = () => {
   return isLoading ? (
     <div>Is Loading...</div>
   ) : (
-    <div className="max-w-6xl container mx-auto mt-10 bg-white shadow overflow-hidden sm:rounded-lg">
+    <div
+      ref={head}
+      className="max-w-6xl container mx-auto mt-10 bg-white shadow overflow-hidden sm:rounded-lg"
+    >
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg leading-6 font-medium text-gray-900">
           {data.label}
