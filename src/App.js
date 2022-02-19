@@ -14,7 +14,6 @@ import EndPointView from "./components/EndpointView";
 import Peoples from "./components/Peoples";
 import Profile from "./containers/Profile";
 import OnBoarding from "./components/OnBoarding";
-import { CheckCircleIcon, XIcon } from "@heroicons/react/solid";
 import Notification from "./components/Notification";
 
 function App() {
