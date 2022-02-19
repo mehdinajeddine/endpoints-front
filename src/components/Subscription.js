@@ -20,7 +20,7 @@ const Subscription = () => {
       }
     };
     getProducts();
-  }, []);
+  }, [navigate]);
 
   return isLoading ? (
     <div>IsLoading</div>
@@ -55,7 +55,7 @@ const Subscription = () => {
                 <h3 className="text-xs font-medium text-gray-900 tracking-wide uppercase">
                   What's included
                 </h3>
-                <ul role="list" className="mt-6 space-y-4">
+                <ul className="mt-6 space-y-4">
                   {tier.includedFeatures.map((feature) => (
                     <li key={feature} className="flex space-x-3">
                       <CheckIcon

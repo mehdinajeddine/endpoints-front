@@ -26,7 +26,7 @@ const PaymentAdd = ({ showTextNotification }) => {
       }
     };
     getProducts();
-  }, []);
+  }, [navigate, id]);
 
   return isLoading ? (
     <div>Loading...</div>
