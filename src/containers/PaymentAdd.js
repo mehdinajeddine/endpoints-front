@@ -4,12 +4,13 @@ import { Elements } from "@stripe/react-stripe-js";
 import stripelogo from "../assets/stripe.png";
 import PaymentAddForm from "../components/PaymentAddForm";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PaymentAdd = ({ showTextNotification }) => {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
   const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
   useEffect(() => {
