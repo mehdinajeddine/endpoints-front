@@ -18,6 +18,7 @@ const Signin = ({ logged, setLogged }) => {
         password: password,
       });
       cookies.set("token", res.data.token);
+      cookies.set("userid", res.data._id);
       if (res.data.avatar) {
         cookies.set("avatar", res.data.avatar.secure_url);
       }

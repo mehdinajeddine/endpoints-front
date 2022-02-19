@@ -15,6 +15,7 @@ import Peoples from "./components/Peoples";
 import Profile from "./containers/Profile";
 import OnBoarding from "./components/OnBoarding";
 import Notification from "./components/Notification";
+import PaymentAdd from "./containers/PaymentAdd";
 
 function App() {
   const [logged, setLogged] = useState(cookies.get("token") || false);
@@ -55,9 +56,9 @@ function App() {
             <Notification message={notif.message} closeNotif={closeNotif} />
           )}
 
-          {logged && !onboarding && (
+          {/* {logged && !onboarding && (
             <OnBoarding setOnboarding={setOnboarding} />
-          )}
+          )} */}
 
           <Routes>
             <Route
@@ -76,6 +77,12 @@ function App() {
             <Route path="/endpoint/:id" element={<EndPointView />} />
             <Route path="/peoples" element={<Peoples />} />
             <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/payment/add/:id"
+              element={
+                <PaymentAdd showTextNotification={showTextNotification} />
+              }
+            />
           </Routes>
         </Router>
       </div>
