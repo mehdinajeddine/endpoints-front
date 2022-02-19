@@ -56,9 +56,9 @@ function App() {
             <Notification message={notif.message} closeNotif={closeNotif} />
           )}
 
-          {/* {logged && !onboarding && (
+          {logged && !onboarding && (
             <OnBoarding setOnboarding={setOnboarding} />
-          )} */}
+          )}
 
           <Routes>
             <Route
