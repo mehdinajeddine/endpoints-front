@@ -14,26 +14,61 @@ import EndPointView from "./components/EndpointView";
 import Peoples from "./components/Peoples";
 import Profile from "./containers/Profile";
 import OnBoarding from "./components/OnBoarding";
+import { CheckCircleIcon, XIcon } from "@heroicons/react/solid";
+import Notification from "./components/Notification";
 
 function App() {
   const [logged, setLogged] = useState(cookies.get("token") || false);
   const [onboarding, setOnboarding] = useState(false);
-  console.log("onboarding : ", onboarding);
+  const [notif, setNotif] = useState({
+    show: false,
+    message: { title: "", subtitle: "" },
+  });
+
+  const closeNotif = () => {
+    const tab = { ...notif };
+    tab.show = false;
+    setNotif(tab);
+  };
+
+  const showTextNotification = (message) => {
+    const tab = { ...notif };
+    tab.show = true;
+    tab.message = message;
+    setNotif(tab);
+  };
+
+  const useIsLoged = (value) => {
+    setLogged(value);
+    showTextNotification({
+      title: "You are logged",
+      subtitle: "Let's enjoy !",
+    });
+  };
 
   return (
     <div className="h-full mb-40">
       <div className="">
         <Router>
           <Header logged={logged} setLogged={setLogged} />
+
+          {notif.show && (
+            <Notification message={notif.message} closeNotif={closeNotif} />
+          )}
+
           {logged && !onboarding && (
             <OnBoarding setOnboarding={setOnboarding} />
           )}
+
           <Routes>
             <Route
               path="/login"
-              element={<Signin logged={logged} setLogged={setLogged} />}
+              element={<Signin logged={logged} setLogged={useIsLoged} />}
             />
-            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/signup"
+              element={<Signup showTextNotification={showTextNotification} />}
+            />
             <Route path="/endpoints/add" element={<EndpointAdd />} />
             <Route path="/" element={<Endpoints />} />
             <Route path="/models" element={<Models />} />

@@ -5,7 +5,7 @@ import axios from "axios";
 
 // import SignupConfirmation from "./SignupConfirmation";
 
-const Signup = () => {
+const Signup = ({ showTextNotification }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordconf, setPasswordconf] = useState("");
@@ -35,6 +35,10 @@ const Signup = () => {
         password: password,
       });
       setRegistered(true);
+      showTextNotification({
+        title: "You are now registered !",
+        subtitle: "You can log in using your email and password.",
+      });
       navigate("/login");
     } catch (e) {
       setError(e.response.data.error);
