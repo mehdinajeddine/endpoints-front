@@ -8,12 +8,27 @@ import axios from "axios";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordconf, setPasswordconf] = useState("");
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const passRegex = new RegExp(
+    "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+  );
 
   const handSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    if (!password.match(passRegex)) {
+      setError(
+        "Please enter a password with a minimum of: 6 characters and 1 number password "
+      );
+      return;
+    }
+    if (password !== passwordconf) {
+      setError("Password and confirmation password doesn't match");
+      return;
+    }
     try {
       await axios.post(process.env.REACT_APP_HOST + "/user/signup", {
         email: email,
@@ -36,7 +51,7 @@ const Signup = () => {
           {error}
         </div>
         <div>Enter your email address and password.</div>
-        <div className="rounded-md shadow-sm -space-y-px">
+        <div className="rounded-md -space-y-px">
           <div>
             <label htmlFor="email-address" className="sr-only">
               Email address
@@ -70,6 +85,28 @@ const Signup = () => {
                 setPassword(e.target.value);
               }}
             />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="sr-only">
+              Password confirmation
+            </label>
+            <input
+              id="passwordc"
+              name="passwordc"
+              type="password"
+              autoComplete="current-password"
+              required
+              className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+              placeholder="Password confirmation"
+              onChange={(e) => {
+                setPasswordconf(e.target.value);
+              }}
+            />
+          </div>
+          <div className="text-sm pt-2">
+            Password Match:{" "}
+            {password !== "" && password === passwordconf ? "Yes" : "No"}
           </div>
         </div>
 
