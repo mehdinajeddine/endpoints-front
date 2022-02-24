@@ -75,8 +75,8 @@ const ModelView = () => {
             onChange={(e) => updateValues(label, e.target.value)}
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
           >
-            <option>True</option>
-            <option>False</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
           </select>
         );
       case "Number":
@@ -281,6 +281,7 @@ const ModelView = () => {
                           >
                             <option value="String">String</option>
                             <option value="Number">Number</option>
+                            <option value="Boolean">Boolean</option>
                             <option value="mongoose.Schema.Types.Mixed">
                               Image
                             </option>
