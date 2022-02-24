@@ -280,6 +280,7 @@ const ModelView = () => {
                             className="form-select appearance-none rounded-none   w-28 px-1 py-1 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
                           >
                             <option value="String">String</option>
+                            <option value="Number">Number</option>
                             <option value="mongoose.Schema.Types.Mixed">
                               Image
                             </option>
